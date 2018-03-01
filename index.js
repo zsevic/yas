@@ -1,7 +1,7 @@
 require('whatwg-fetch')
 
-// fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
-fetch('http://localhost:8080')
+fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
+// fetch('http://localhost:8080')
   .then(response => response.json())
   .then(res => {
     let schedule = []
