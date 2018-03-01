@@ -1,7 +1,7 @@
 require('whatwg-fetch')
 
-fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
-  // fetch('http://localhost:8080')
+// fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
+fetch('http://localhost:8080')
   .then(response => response.json())
   .then(res => {
     let schedule = []
@@ -32,7 +32,7 @@ fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
             }" style="text-align:center;">
             ${schedule[index + 1][i + 1].course}<br>
             ${schedule[index + 1][i + 1].group ? schedule[index + 1][i + 1].group + '<br>' : ''}
-            ${schedule[index + 1][i + 1].professor}
+            ${schedule[index + 1][i + 1].professor}<br>
             ${schedule[index + 1][i + 1].classroom}<br>
             </td>`
             day.innerHTML += lecture
