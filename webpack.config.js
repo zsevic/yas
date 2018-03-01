@@ -4,12 +4,17 @@ module.exports = {
     filename: './script.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ],
         exclude: /node_modules/
       }
     ]
-  }
+  },
+  mode: 'production'
 }
