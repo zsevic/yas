@@ -13,4 +13,6 @@ webpack
 ```
 
 #### TODO
-* fix collisions
+- [ ] fix collisions
+- [ ] responsive design
+- [ ] make it PWA
