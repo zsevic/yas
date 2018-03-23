@@ -14,6 +14,6 @@ webpack
 
 #### TODO
 - [x] optimize it for parallel scraping
+- [x] responsive design
 - [ ] fix collisions
-- [ ] responsive design
 - [ ] make it PWA
