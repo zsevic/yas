@@ -28,7 +28,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/yas",
+  "start_url": "/yas/index.html",
   "display": "standalone",
   "background_color": "#FF9800",
   "theme_color": "#FF9800"

@@ -61,20 +61,28 @@ const makeSchedule = res => {
 
       while (i < 13) {
         if (!schedule[index + 1][i + 1]) {
-          day.innerHTML += '<td><br></td>'
+          day.innerHTML += '<td class="border border-info"><br></td>'
           i++
         } else {
           let lecture = `<td colspan="${
             schedule[index + 1][i + 1].duration
-          }" style="text-align:center;">
-            ${schedule[index + 1][i + 1].course}<br>
+          }" class="text-center border border-info">
+          <small class="text-center">${
+  schedule[index + 1][i + 1].course
+}</small><br>
             ${
   schedule[index + 1][i + 1].group !== 'x'
-    ? schedule[index + 1][i + 1].group + '<br>'
+    ? '<small class="text-center">' +
+                  schedule[index + 1][i + 1].group +
+                  '</small><br>'
     : ''
 }
-            ${schedule[index + 1][i + 1].professor}<br>
-            ${schedule[index + 1][i + 1].classroom}<br>
+            <small class="text-center">${
+  schedule[index + 1][i + 1].professor
+}</small><br>
+            <small class="text-center">${
+  schedule[index + 1][i + 1].classroom
+}</small>
             </td>`
           day.innerHTML += lecture
           i += schedule[index + 1][i + 1].duration
