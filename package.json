@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "idb": "^2.1.1",
+    "lodash.isequal": "^4.5.0",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

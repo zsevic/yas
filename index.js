@@ -1,45 +1,112 @@
 require('whatwg-fetch')
+const idb = require('idb')
+const isEqual = require('lodash.isequal')
 
-fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
-  .then(response => response.json())
-  .then(res => {
-    res = JSON.parse(res.body)
-    let schedule = []
+const dbPromise = idb.open('yas-store', 1, upgradeDB => {
+  upgradeDB.createObjectStore('keyval')
+})
 
-    res.forEach(el => {
-      if (!schedule[el.day]) {
-        schedule[el.day] = []
-        schedule[el.day][el.start] = el
-      } else {
-        schedule[el.day][el.start] = el
-      }
+const idbKeyVal = {
+  get (key) {
+    return dbPromise.then(db => {
+      return db
+        .transaction('keyval')
+        .objectStore('keyval')
+        .get(key)
     })
+  },
+  set (key, val) {
+    return dbPromise.then(db => {
+      const tx = db.transaction('keyval', 'readwrite')
+      tx.objectStore('keyval').put(val, key)
+      return tx.complete
+    })
+  }
+}
 
-    let days = document.querySelectorAll('.days')
-    days.forEach((day, index) => {
-      if (!schedule[index + 1]) {
-        for (let i = 0; i < 13; i++) {
+const clearSchedule = () => {
+  let days = document.querySelectorAll('.days')
+
+  days.forEach((day, index) => {
+    while (day.childNodes.length > 3) {
+      day.removeChild(day.lastChild)
+    }
+  })
+}
+
+const makeSchedule = res => {
+  clearSchedule()
+  let schedule = []
+
+  console.log(res)
+
+  res.forEach(el => {
+    if (!schedule[el.day]) {
+      schedule[el.day] = []
+      schedule[el.day][el.start] = el
+    } else {
+      schedule[el.day][el.start] = el
+    }
+  })
+
+  let days = document.querySelectorAll('.days')
+
+  days.forEach((day, index) => {
+    if (!schedule[index + 1]) {
+      for (let i = 0; i < 13; i++) {
+        day.innerHTML += '<td><br></td>'
+      }
+    } else {
+      let i = 0
+
+      while (i < 13) {
+        if (!schedule[index + 1][i + 1]) {
           day.innerHTML += '<td><br></td>'
-        }
-      } else {
-        let i = 0
-        while (i < 13) {
-          if (!schedule[index + 1][i + 1]) {
-            day.innerHTML += '<td><br></td>'
-            i++
-          } else {
-            let lecture = `<td colspan="${
-              schedule[index + 1][i + 1].duration
-            }" style="text-align:center;">
+          i++
+        } else {
+          let lecture = `<td colspan="${
+            schedule[index + 1][i + 1].duration
+          }" style="text-align:center;">
             ${schedule[index + 1][i + 1].course}<br>
-            ${schedule[index + 1][i + 1].group !== 'x' ? schedule[index + 1][i + 1].group + '<br>' : ''}
+            ${
+  schedule[index + 1][i + 1].group !== 'x'
+    ? schedule[index + 1][i + 1].group + '<br>'
+    : ''
+}
             ${schedule[index + 1][i + 1].professor}<br>
             ${schedule[index + 1][i + 1].classroom}<br>
             </td>`
-            day.innerHTML += lecture
-            i += schedule[index + 1][i + 1].duration
-          }
+          day.innerHTML += lecture
+          i += schedule[index + 1][i + 1].duration
         }
       }
-    })
+    }
+  })
+}
+
+const initialSchedule = async function () {
+  let schedule = await idbKeyVal.get('schedule')
+  if (!schedule) return
+
+  makeSchedule(schedule)
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(() => {
+    console.log('Service worker is registered!')
+  })
+}
+
+initialSchedule()
+
+fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
+  .then(response => response.json())
+  .then(async res => {
+    res = JSON.parse(res.body)
+    let schedule = await idbKeyVal.get('schedule')
+
+    if (!isEqual(res, schedule)) {
+      makeSchedule(res)
+      idbKeyVal.set('schedule', res)
+    }
   })
