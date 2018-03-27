@@ -1,7 +1,8 @@
 module.exports = {
   entry: ['whatwg-fetch', './index.js'],
   output: {
-    filename: './script.js'
+    filename: './script.js',
+    path: __dirname
   },
   module: {
     rules: [
