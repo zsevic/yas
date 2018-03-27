@@ -1,19 +1,20 @@
 # yas
-> Yet Another Schedule 
 
+> Yet Another Schedule
 
-### Demo
+Progressive Web App that makes schedule of lectures from different student groups
+
+### [Demo](https://sevic.me/yas)
+
 ![yas](./assets/demo.png)
 
-
 ### Setup
+
 ```
 npm install
 webpack
 ```
 
 #### TODO
-- [x] optimize it for parallel scraping
-- [x] responsive design
-- [ ] fix collisions
-- [ ] make it PWA
+
+* [ ] fix collisions
