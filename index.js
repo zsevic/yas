@@ -32,7 +32,7 @@ fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
               schedule[index + 1][i + 1].duration
             }" style="text-align:center;">
             ${schedule[index + 1][i + 1].course}<br>
-            ${schedule[index + 1][i + 1].group ? schedule[index + 1][i + 1].group + '<br>' : ''}
+            ${schedule[index + 1][i + 1].group !== 'x' ? schedule[index + 1][i + 1].group + '<br>' : ''}
             ${schedule[index + 1][i + 1].professor}<br>
             ${schedule[index + 1][i + 1].classroom}<br>
             </td>`
