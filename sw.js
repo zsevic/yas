@@ -1,5 +1,5 @@
 const cacheName = 'yas'
-const filesToCache = ['/', '/index.html']
+const filesToCache = ['/yas/', '/yas/index.html']
 
 self.addEventListener('install', e => {
   console.log('[ServiceWorker] Install')
