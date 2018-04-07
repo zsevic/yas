@@ -4,17 +4,17 @@
 
 Progressive Web App that makes schedule of lectures from different student groups
 
-### [Demo](https://sevic.me/yas)
+### :rocket: [Demo](https://sevic.me/yas)
 
 ![yas](./assets/demo.png)
 
-### Setup
+### :wrench: Setup
 
 ```
 npm install
 webpack
 ```
 
-#### TODO
+### :construction: Todo
 
 * [ ] fix collisions
