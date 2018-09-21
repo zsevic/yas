@@ -107,10 +107,10 @@ if ('serviceWorker' in navigator) {
 
 initialSchedule()
 
-fetch('https://vd2wzffzz8.execute-api.eu-central-1.amazonaws.com/latest')
+fetch('http://localhost:8080')
   .then(response => response.json())
   .then(async res => {
-    res = JSON.parse(res.body)
+    // res = JSON.parse(res.body)
     let schedule = await idbKeyVal.get('schedule')
 
     if (!isEqual(res, schedule)) {
