@@ -110,6 +110,11 @@ initialSchedule()
 fetch('http://localhost:8080')
   .then(response => response.json())
   .then(async res => {
+    if (res.err) {
+      console.log(res.err)
+      document.getElementById('error').innerHTML = res.err
+      return
+    }
     // res = JSON.parse(res.body)
     let schedule = await idbKeyVal.get('schedule')
 
