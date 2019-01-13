@@ -11,7 +11,7 @@ Progressive Web App that makes schedule of lectures from different student group
 ### :wrench: Setup
 
 ```
-npm install
+npm i
 webpack
 ```
 

@@ -1,8 +1,10 @@
+const path = require('path')
+
 module.exports = {
-  entry: ['whatwg-fetch', './index.js'],
+  entry: ['whatwg-fetch', './src/index.js'],
   output: {
     filename: './script.js',
-    path: __dirname
+    path: path.join(__dirname, 'dist')
   },
   module: {
     rules: [
