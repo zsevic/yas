@@ -11,10 +11,10 @@ Progressive Web App that makes schedule of lectures from different student group
 ### :wrench: Setup
 
 ```
-npm i
-webpack
+yarn
+yarn dev
 ```
 
 ### :construction: Todo
 
-* [ ] fix collisions
+- [ ] fix collisions

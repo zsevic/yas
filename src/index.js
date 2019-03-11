@@ -1,13 +1,13 @@
-require('whatwg-fetch')
-const idb = require('idb')
-const isEqual = require('lodash.isequal')
+import 'whatwg-fetch'
+import idb from 'idb'
+import isEqual from 'lodash.isequal'
 
 const dbPromise = idb.open('yas-store', 1, upgradeDB => {
   upgradeDB.createObjectStore('keyval')
 })
 
 const idbKeyVal = {
-  get(key) {
+  get (key) {
     return dbPromise.then(db => {
       return db
         .transaction('keyval')
@@ -15,7 +15,7 @@ const idbKeyVal = {
         .get(key)
     })
   },
-  set(key, val) {
+  set (key, val) {
     return dbPromise.then(db => {
       const tx = db.transaction('keyval', 'readwrite')
       tx.objectStore('keyval').put(val, key)
@@ -66,23 +66,23 @@ const makeSchedule = res => {
         } else {
           let lecture = `<td colspan="${
             schedule[index + 1][i + 1].duration
-            }" class="text-center border border-info">
+          }" class="text-center border border-info">
           <small class="text-center">${
-            schedule[index + 1][i + 1].course
-            }</small><br>
+  schedule[index + 1][i + 1].course
+}</small><br>
             ${
-            schedule[index + 1][i + 1].group !== 'x'
-              ? '<small class="text-center">' +
-              schedule[index + 1][i + 1].group +
-              '</small><br>'
-              : ''
-            }
+  schedule[index + 1][i + 1].group !== 'x'
+    ? '<small class="text-center">' +
+                  schedule[index + 1][i + 1].group +
+                  '</small><br>'
+    : ''
+}
             <small class="text-center">${
-            schedule[index + 1][i + 1].professor
-            }</small><br>
+  schedule[index + 1][i + 1].professor
+}</small><br>
             <small class="text-center">${
-            schedule[index + 1][i + 1].classroom
-            }</small>
+  schedule[index + 1][i + 1].classroom
+}</small>
             </td>`
           day.innerHTML += lecture
           i += schedule[index + 1][i + 1].duration
@@ -100,14 +100,14 @@ const initialSchedule = async function () {
 }
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(() => {
+  navigator.serviceWorker.register('/src/sw.js').then(() => {
     console.log('Service worker is registered!')
   })
 }
 
 initialSchedule()
 
-fetch('http://localhost:8080')
+fetch('https://yas-server.herokuapp.com')
   .then(response => response.json())
   .then(async res => {
     if (res.err) {
