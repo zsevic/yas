@@ -5,7 +5,7 @@ export default {
 
   output: {
     filename: './bundle.js',
-    path: path.join(__dirname, 'src'),
+    path: path.join(__dirname, 'src')
   },
 
   module: {
@@ -14,17 +14,17 @@ export default {
         test: /\.js$/,
         use: [
           {
-            loader: 'babel-loader',
-          },
+            loader: 'babel-loader'
+          }
         ],
-        exclude: /node_modules/,
-      },
-    ],
+        exclude: /node_modules/
+      }
+    ]
   },
 
   mode: 'production',
 
   node: {
-    fs: 'empty',
-  },
+    fs: 'empty'
+  }
 }

@@ -112,7 +112,6 @@ fetch('https://yas-server.herokuapp.com')
   .then(async res => {
     if (res.err) {
       console.log(res.err)
-      document.getElementById('error').innerHTML = res.err
       return
     }
     // res = JSON.parse(res.body)
